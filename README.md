@@ -43,6 +43,13 @@ The exporter collects and exposes the following metrics:
 - **Deadlocks**
 - **Locks**
 
+### User Metrics
+- **User connections**
+- **User queries**
+
+### Database Metrics
+- **Database transaction rate**
+
 ## Prerequisites
 
 - A PostgreSQL instance with sufficient permissions to access `pg_stat` and related views.
@@ -142,7 +149,30 @@ Below is an overview of the metrics exposed by PostMetric:
 - **`postgres_deadlocks`**: Number of deadlocks detected.
 - **`postgres_locks`**: Number of active locks.
 
+### User Metrics
+- **`postgres_user_connections`**: Number of connections per user.
+- **`postgres_user_queries`**: Number of queries executed per user.
+
+### Database Metrics
+- **`postgres_database_transaction_rate`**: Transaction rate per database.
+
 ---
 
 PostMetric provides a comprehensive set of metrics to help you monitor and optimize PostgreSQL performance effectively. Happy monitoring!
+
+## Package Structure
+
+The codebase is organized into the following packages:
+
+- **`main`**: The entry point of the application.
+- **`metrics`**: Contains metric definitions and registration logic.
+- **`collector`**: Contains the logic for collecting metrics from PostgreSQL.
+
+## Adding New Metrics
+
+To add new metrics, follow these steps:
+
+1. **Define the Metric**: Add the new metric definition in `pkg/metrics/metrics.go`.
+2. **Register the Metric**: Ensure the new metric is registered in the `RegisterMetrics` function in `pkg/metrics/metrics.go`.
+3. **Collect the Metric**: Update the `CollectMetrics` function in `pkg/metrics/collector.go` to collect the new metric.
 
